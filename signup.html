@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="js/theme.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Elite Boxing — Sign Up</title>
   <meta name="description" content="Sign up for Elite Boxing Fitness Center in Oviedo, FL. Choose your membership plan and get started today.">
@@ -83,10 +84,10 @@
     .su-prog-step {
       display: flex; align-items: center; gap: 8px;
       font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); transition: color 0.4s ease;
+      color: rgba(var(--text-rgb),0.3); transition: color 0.4s ease;
     }
-    .su-prog-step.active { color: #fff; }
-    .su-prog-step.done   { color: var(--red); }
+    .su-prog-step.active { color: var(--text); }
+    .su-prog-step.done   { color: var(--red-text); }
     .su-prog-num {
       width: 28px; height: 28px; border-radius: 50%;
       border: 1.5px solid currentColor; flex-shrink: 0;
@@ -125,7 +126,7 @@
       text-transform: uppercase; letter-spacing: 0.05em;
       margin-bottom: 22px; display: flex; align-items: center; gap: 10px;
     }
-    .su-block-title svg { color: var(--red); flex-shrink: 0; }
+    .su-block-title svg { color: var(--red-text); flex-shrink: 0; }
 
     /* Plan cards */
     .plan-options { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 8px; }
@@ -170,11 +171,11 @@
       display: inline-flex; align-items: center; gap: 8px;
       padding: 7px 14px; margin-bottom: 20px;
       background: rgba(240,180,41,.08); border: 1px solid rgba(240,180,41,.25);
-      border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--red);
+      border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--red-text);
       cursor: pointer;
     }
-    .plan-chip svg { color: rgba(255,255,255,.4); transition: color .2s; }
-    .plan-chip:hover svg { color: var(--red); }
+    .plan-chip svg { color: rgba(var(--text-rgb),0.4); transition: color .2s; }
+    .plan-chip:hover svg { color: var(--red-text); }
 
     /* Payment block */
     .pay-summary {
@@ -183,9 +184,9 @@
       border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;
     }
     .pay-summary-label { font-size: 14px; font-weight: 600; }
-    .pay-summary-price { font-family: 'Oswald',sans-serif; font-size: 22px; font-weight: 700; color: var(--red); }
+    .pay-summary-price { font-family: 'Oswald',sans-serif; font-size: 22px; font-weight: 700; color: var(--red-text); }
     .stripe-card-wrap {
-      background: rgba(255,255,255,.04); border: 1.5px solid var(--border);
+      background: rgba(var(--text-rgb),0.04); border: 1.5px solid var(--border);
       border-radius: 8px; padding: 14px 16px; cursor: text;
       transition: border-color .25s;
     }
@@ -207,7 +208,7 @@
     }
     .waiver-box h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
     .waiver-box p  { margin-bottom: 10px; }
-    .waiver-agree  { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; color: rgba(255,255,255,.8); line-height: 1.5; }
+    .waiver-agree  { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; color: rgba(var(--text-rgb),0.8); line-height: 1.5; }
     .waiver-agree input[type="checkbox"] {
       appearance: none; -webkit-appearance: none;
       width: 18px; height: 18px; min-width: 18px;
@@ -229,7 +230,7 @@
       padding: 12px 22px; border-radius: var(--radius); cursor: pointer; flex-shrink: 0;
       display: flex; align-items: center; gap: 6px; transition: border-color .2s, color .2s;
     }
-    .btn-back:hover { border-color: rgba(255,255,255,.3); color: #fff; }
+    .btn-back:hover { border-color: var(--border-hover); color: var(--text); }
     .btn-next { flex: 1; }
 
     /* Errors */
@@ -241,7 +242,7 @@
       width: 76px; height: 76px; border-radius: 50%;
       background: rgba(240,180,41,.1); border: 1.5px solid rgba(240,180,41,.3);
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px; color: var(--red);
+      margin: 0 auto 24px; color: var(--red-text);
     }
     .su-success h2 { font-family: 'Oswald',sans-serif; font-size: 40px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
     .su-success p  { font-size: 15px; color: var(--muted); max-width: 460px; margin: 0 auto 10px; line-height: 1.75; }
@@ -249,7 +250,7 @@
       display: inline-block; margin: 16px 0 8px;
       padding: 10px 24px; background: rgba(240,180,41,.08);
       border: 1px solid rgba(240,180,41,.25); border-radius: 999px;
-      font-size: 14px; font-weight: 600; color: var(--red);
+      font-size: 14px; font-weight: 600; color: var(--red-text);
     }
 
     /* Responsive */
@@ -291,6 +292,10 @@
         <li><a href="signup.html" class="nav-link nav-link--signup active">Sign Up</a></li>
       </ul>
       <a href="signup.html" class="btn btn-primary btn-sm nav-cta">Join Now</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -307,7 +312,7 @@
         <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
         <li><a href="partners.html" class="mobile-link">Partners</a></li>
         <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
-        <li><a href="signup.html" class="mobile-link" style="color:var(--red);font-weight:600;">Sign Up</a></li>
+        <li><a href="signup.html" class="mobile-link" style="color:var(--red-text);font-weight:600;">Sign Up</a></li>
       </ul>
       <a href="signup.html" class="btn btn-primary btn-full mobile-cta">Join Now</a>
     </div>
@@ -644,8 +649,8 @@
         </div>
         <h2>You're <span class="text-red">In!</span></h2>
         <div class="su-success-plan" id="su-success-plan"></div>
-        <p>A confirmation receipt has been sent to <strong id="su-success-email" style="color:#fff;"></strong></p>
-        <p>A coach will reach out within 24 hours to confirm your first session. Questions? Call <a href="tel:4072308235" style="color:var(--red);">(407) 230-8235</a>.</p>
+        <p>A confirmation receipt has been sent to <strong id="su-success-email" style="color:var(--text);"></strong></p>
+        <p>A coach will reach out within 24 hours to confirm your first session. Questions? Call <a href="tel:4072308235" style="color:var(--red-text);">(407) 230-8235</a>.</p>
         <div style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
           <a href="calendar.html" class="btn btn-outline">View Schedule</a>
           <a href="index.html" class="btn btn-primary">Back to Home</a>
@@ -770,20 +775,39 @@
       const elements = stripe.elements({
         fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap' }],
       });
+      const cardElementStyle = (theme) => (theme === 'light'
+        ? {
+            base: {
+              iconColor: '#f0b429',
+              color: '#111111',
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '15px',
+              fontSmoothing: 'antialiased',
+              '::placeholder': { color: 'rgba(17,17,17,0.35)' },
+            },
+            invalid: { iconColor: '#f87171', color: '#f87171' },
+          }
+        : {
+            base: {
+              iconColor: '#f0b429',
+              color: '#ffffff',
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '15px',
+              fontSmoothing: 'antialiased',
+              '::placeholder': { color: 'rgba(255,255,255,0.35)' },
+            },
+            invalid: { iconColor: '#f87171', color: '#f87171' },
+          });
       cardElement = elements.create('card', {
-        style: {
-          base: {
-            iconColor: '#f0b429',
-            color: '#ffffff',
-            fontFamily: '"Inter", sans-serif',
-            fontSize: '15px',
-            fontSmoothing: 'antialiased',
-            '::placeholder': { color: 'rgba(255,255,255,0.35)' },
-          },
-          invalid: { iconColor: '#f87171', color: '#f87171' },
-        },
+        style: cardElementStyle(document.documentElement.getAttribute('data-theme')),
       });
       cardElement.mount('#stripe-card-element');
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          cardElement.update({ style: cardElementStyle(document.documentElement.getAttribute('data-theme')) });
+        });
+      }
       const wrap = document.getElementById('stripe-card-wrap');
       cardElement.on('focus',  () => wrap.classList.add('focused'));
       cardElement.on('blur',   () => wrap.classList.remove('focused'));

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="js/theme.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EBYC Non-Profit — Elite Boxing Youth Champs</title>
   <meta name="description" content="Elite Boxing Youth Champs (EBYC) is a 501(c)(3) non-profit using the art of boxing to educate and empower at-risk youth in Central Florida.">
@@ -63,6 +64,7 @@
       text-transform: uppercase;
       line-height: 0.95;
       margin-bottom: 28px;
+      color: #fff;
     }
     .ebyc-hero-title em {
       font-style: normal;
@@ -152,7 +154,7 @@
     }
     .ebyc-about-text .lead {
       font-size: 17px;
-      color: rgba(255,255,255,0.85);
+      color: rgba(var(--text-rgb),0.85);
       line-height: 1.75;
       margin-bottom: 16px;
     }
@@ -189,7 +191,7 @@
       background: rgba(240,180,41,0.1);
       border: 1px solid rgba(240,180,41,0.2);
       display: flex; align-items: center; justify-content: center;
-      color: var(--red);
+      color: var(--red-text);
     }
     .pillar-title {
       font-family: 'Oswald', sans-serif;
@@ -231,7 +233,7 @@
       align-items: center;
       gap: 10px;
     }
-    .elig-block h3 svg { color: var(--red); }
+    .elig-block h3 svg { color: var(--red-text); }
     .elig-list {
       display: flex;
       flex-direction: column;
@@ -242,7 +244,7 @@
       align-items: flex-start;
       gap: 10px;
       font-size: 14px;
-      color: rgba(255,255,255,0.8);
+      color: rgba(var(--text-rgb),0.8);
       line-height: 1.5;
     }
     .elig-dot {
@@ -285,7 +287,7 @@
       font-family: 'Oswald', sans-serif;
       font-size: 22px;
       font-weight: 700;
-      color: var(--red);
+      color: var(--red-text);
     }
     .apply-title {
       font-family: 'Oswald', sans-serif;
@@ -322,7 +324,7 @@
       background: rgba(240,180,41,0.1);
       border: 1px solid rgba(240,180,41,0.2);
       display: flex; align-items: center; justify-content: center;
-      color: var(--red);
+      color: var(--red-text);
     }
     .support-title {
       font-family: 'Oswald', sans-serif;
@@ -365,6 +367,7 @@
       text-transform: uppercase;
       line-height: 1.05;
       margin-bottom: 16px;
+      color: #fff;
     }
     .ebyc-cta p {
       font-size: 17px;
@@ -396,7 +399,7 @@
 <body>
 
   <!-- ===== NAV ===== -->
-  <nav id="nav" class="nav">
+  <nav id="nav" class="nav nav--photo">
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">
         <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="logo-img">
@@ -413,6 +416,10 @@
         <li><a href="signup.html" class="nav-link nav-link--signup">Sign Up</a></li>
       </ul>
       <a href="signup.html" class="btn btn-primary btn-sm nav-cta">Join Now</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+        <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -430,7 +437,7 @@
         <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
         <li><a href="partners.html" class="mobile-link">Partners</a></li>
         <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
-        <li><a href="signup.html" class="mobile-link" style="color:var(--red);font-weight:600;">Sign Up</a></li>
+        <li><a href="signup.html" class="mobile-link" style="color:var(--red-text);font-weight:600;">Sign Up</a></li>
       </ul>
       <a href="signup.html" class="btn btn-primary btn-full mobile-cta">Join Now</a>
     </div>
@@ -587,7 +594,7 @@
         <div class="apply-card reveal-up">
           <div class="apply-num">1</div>
           <div class="apply-title">Send an Email</div>
-          <p class="apply-desc">Email us at <a href="mailto:elitebfc1065@gmail.com" style="color:var(--red)">elitebfc1065@gmail.com</a> to request an application. Tell us a little about your child and your situation.</p>
+          <p class="apply-desc">Email us at <a href="mailto:elitebfc1065@gmail.com" style="color:var(--red-text)">elitebfc1065@gmail.com</a> to request an application. Tell us a little about your child and your situation.</p>
         </div>
         <div class="apply-card apply-card--featured reveal-up">
           <div class="apply-num">2</div>
@@ -603,7 +610,7 @@
 
       <div style="text-align:center;margin-top:48px;" class="reveal-up">
         <a href="mailto:elitebfc1065@gmail.com" class="btn btn-primary btn-lg">Email Us to Apply</a>
-        <p style="font-size:13px;color:var(--muted-2);margin-top:16px;">Or call us at <a href="tel:4072308235" style="color:var(--red)">(407) 230-8235</a></p>
+        <p style="font-size:13px;color:var(--muted-2);margin-top:16px;">Or call us at <a href="tel:4072308235" style="color:var(--red-text)">(407) 230-8235</a></p>
       </div>
     </div>
   </section>
