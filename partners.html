@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Partners — Elite Boxing Fitness Center</title>
+  <meta name="description" content="Elite Partners is a sponsorship program inviting local businesses to support youth empowerment through boxing in Central Florida.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================================
+       PARTNERS PAGE
+       ============================================================ */
+
+    /* ---- Hero ---- */
+    .pt-hero {
+      padding: calc(var(--nav-h) + 80px) 0 80px;
+      background: var(--bg-dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .pt-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,180,41,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Gold ring decorations */
+    .pt-hero::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(240,180,41,0.06);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .pt-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(48px, 9vw, 96px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin: 14px 0 24px;
+    }
+    .pt-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .pt-tagline {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(13px, 2vw, 17px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    .pt-tagline span { color: rgba(255,255,255,0.25); }
+
+    /* ---- Section base ---- */
+    .pt-section { padding: 88px 0; }
+    .pt-section.bg-dark { background: var(--bg-dark); }
+    .pt-section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .pt-section-header h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(30px, 5vw, 50px);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 10px 0 14px;
+      line-height: 1.05;
+    }
+    .pt-section-header p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ---- Current partners grid ---- */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .partner-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .partner-card:hover {
+      border-color: var(--red);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    }
+    .partner-icon {
+      width: 72px; height: 72px;
+      border-radius: 20px;
+      background: rgba(240,180,41,0.08);
+      border: 1px solid rgba(240,180,41,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red);
+    }
+    .partner-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+    }
+    .partner-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .partner-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--red);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: gap 0.2s ease;
+    }
+    .partner-link:hover { gap: 10px; }
+    .partner-link svg { flex-shrink: 0; }
+
+    /* "Your business here" card */
+    .partner-card--ghost {
+      border-style: dashed;
+      border-color: rgba(240,180,41,0.2);
+      background: rgba(240,180,41,0.03);
+    }
+    .partner-card--ghost:hover {
+      border-color: var(--red);
+      background: rgba(240,180,41,0.06);
+    }
+    .partner-card--ghost .partner-icon {
+      background: rgba(240,180,41,0.05);
+    }
+    .partner-card--ghost .partner-name { color: var(--muted); }
+
+    /* ---- Benefits ---- */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .benefit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .benefit-card:hover { border-color: var(--red); transform: translateY(-3px); }
+    .benefit-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(240,180,41,0.1);
+      border: 1px solid rgba(240,180,41,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+    }
+    .benefit-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benefit-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ---- Sponsor form ---- */
+    .pt-form-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .pt-form-text h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin: 10px 0 18px;
+    }
+    .pt-form-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .pt-contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pt-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+    }
+    .pt-contact-item svg { color: var(--red); flex-shrink: 0; }
+    .pt-contact-item a { color: inherit; transition: color 0.2s; }
+    .pt-contact-item a:hover { color: var(--red); }
+
+    .pt-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pt-form h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pt-form-success {
+      display: none;
+      text-align: center;
+      padding: 32px 0;
+    }
+    .pt-form-success svg { color: var(--red); margin-bottom: 16px; }
+    .pt-form-success h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .pt-form-success p { font-size: 14px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .pt-form-wrap { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 700px) {
+      .partners-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .pt-form { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav" class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+        <li><a href="calendar.html" class="nav-link">Schedule</a></li>
+        <li><a href="memberships.html" class="nav-link">Memberships</a></li>
+        <li><a href="ebyc.html" class="nav-link">EBYC</a></li>
+        <li><a href="partners.html" class="nav-link active">Partners</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="signup.html" class="nav-link nav-link--signup">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-sm nav-cta">Join Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <ul>
+        <li><a href="index.html#about" class="mobile-link">About</a></li>
+        <li><a href="index.html#programs" class="mobile-link">Programs</a></li>
+        <li><a href="calendar.html" class="mobile-link">Schedule</a></li>
+        <li><a href="memberships.html" class="mobile-link">Memberships</a></li>
+        <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
+        <li><a href="partners.html" class="mobile-link">Partners</a></li>
+        <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        <li><a href="signup.html" class="mobile-link" style="color:var(--red);font-weight:600;">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-full mobile-cta">Join Now</a>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="pt-hero">
+    <div class="container">
+      <div class="pt-tagline reveal-up">
+        Empower Youth <span>·</span> Build Champions <span>·</span> Be a Sponsor
+      </div>
+      <h1 class="pt-title reveal-up">Elite <span class="text-red">Partners</span></h1>
+      <p class="pt-sub reveal-up">Local businesses and organizations that believe in our mission of empowering the community through fitness, discipline, and mentorship.</p>
+      <a href="#become-partner" class="btn btn-primary btn-lg reveal-up">Become a Partner</a>
+    </div>
+  </section>
+
+  <!-- ===== CURRENT PARTNERS ===== -->
+  <section class="pt-section">
+    <div class="container">
+      <div class="pt-section-header reveal-up">
+        <span class="section-tag">Our Sponsors</span>
+        <h2>Current <span class="text-red">Partners</span></h2>
+        <p>These businesses stand behind our mission and help make Elite Boxing a pillar of the Central Florida community.</p>
+      </div>
+
+      <div class="partners-grid">
+
+        <div class="partner-card reveal-up">
+          <div class="partner-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="partner-name">Jeff's Plumbing Orlando</div>
+          <p class="partner-desc">Trusted local plumbing services serving the greater Orlando area. Proud supporter of youth athletics and community development in Central Florida.</p>
+          <a href="https://jeffsplumbingorlando.com/" target="_blank" rel="noopener" class="partner-link">
+            Visit Website
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+
+        <div class="partner-card reveal-up">
+          <div class="partner-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <div class="partner-name">Dawkins Family Foundation</div>
+          <p class="partner-desc">A community-focused foundation dedicated to empowering families and individuals through education, health, and youth development initiatives.</p>
+          <a href="https://dawkinsfamilyfoundation.org/" target="_blank" rel="noopener" class="partner-link">
+            Visit Website
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+
+        <div class="partner-card reveal-up">
+          <div class="partner-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+          </div>
+          <div class="partner-name">Appliances of Orlando</div>
+          <p class="partner-desc">Orlando's go-to destination for quality home appliances. A local business investing in the health and future of Central Florida's youth.</p>
+          <a href="https://www.appliancesoflando.com/" target="_blank" rel="noopener" class="partner-link">
+            Visit Website
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Ghost "your business" card -->
+      <div style="max-width:380px;margin:0 auto;" class="reveal-up">
+        <div class="partner-card partner-card--ghost" style="cursor:default;">
+          <div class="partner-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="partner-name" style="color:var(--muted-2);">Your Business Here</div>
+          <p class="partner-desc">Interested in supporting Elite Boxing and the EBYC mission? We'd love to have you on board.</p>
+          <a href="#become-partner" class="partner-link">
+            Learn How
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS ===== -->
+  <section class="pt-section bg-dark">
+    <div class="container">
+      <div class="pt-section-header reveal-up">
+        <span class="section-tag">Why Partner</span>
+        <h2>What You <span class="text-red">Get</span></h2>
+        <p>Partnering with Elite Boxing is more than a sponsorship — it's a visible commitment to your community's next generation.</p>
+      </div>
+      <div class="benefits-grid">
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="benefit-title">Online Visibility</div>
+          <p class="benefit-desc">Your business name and link featured on our Elite Partners page, reaching our growing community of athletes, parents, and supporters.</p>
+        </div>
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div class="benefit-title">Social Media Recognition</div>
+          <p class="benefit-desc">Partner shoutouts across our Instagram, Facebook, and YouTube channels — platforms followed by our active local boxing community.</p>
+        </div>
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="benefit-title">Community Association</div>
+          <p class="benefit-desc">Align your brand with discipline, youth empowerment, and athletic excellence — values that resonate deeply in Central Florida.</p>
+        </div>
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="benefit-title">Support EBYC</div>
+          <p class="benefit-desc">Partnership funding directly supports our EBYC non-profit, giving at-risk youth access to coaching and mentorship they couldn't otherwise afford.</p>
+        </div>
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="benefit-title">Local Impact</div>
+          <p class="benefit-desc">Every sponsorship dollar stays local — funding youth programs, equipment, and coaching in the Oviedo and greater Central Florida area.</p>
+        </div>
+
+        <div class="benefit-card reveal-up">
+          <div class="benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="benefit-title">Gym Recognition</div>
+          <p class="benefit-desc">Your business recognized in-gym to our daily community of members, families, coaches, and visitors passing through the facility.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BECOME A PARTNER FORM ===== -->
+  <section class="pt-section" id="become-partner">
+    <div class="container">
+      <div class="pt-form-wrap">
+
+        <div class="pt-form-text reveal-left">
+          <span class="section-tag">Get Involved</span>
+          <h2>Become an <span class="text-red">Elite Partner</span></h2>
+          <p>Fill out the form and our team will reach out to discuss partnership options that fit your business. There's no one-size-fits-all — we work with partners of all sizes.</p>
+          <p>Whether you're a solo business owner or a larger organization, there's a way to make a meaningful contribution to youth boxing in Central Florida.</p>
+          <div class="pt-contact-items">
+            <div class="pt-contact-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:4072308235">(407) 230-8235</a>
+            </div>
+            <div class="pt-contact-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a>
+            </div>
+            <div class="pt-contact-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>2462 W SR 426 #1038, Oviedo, FL 32765</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-form reveal-right" id="partner-form-wrap">
+          <h3>Partner Inquiry</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:4px;">We'll follow up within 2 business days.</p>
+
+          <form id="partner-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company">Company Name *</label>
+                <input type="text" id="company" name="company" placeholder="Acme Co." required>
+              </div>
+              <div class="form-group">
+                <label for="contact">Contact Name *</label>
+                <input type="text" id="contact" name="contact" placeholder="Jane Smith" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pt-email">Email *</label>
+                <input type="email" id="pt-email" name="email" placeholder="jane@company.com" required>
+              </div>
+              <div class="form-group">
+                <label for="pt-phone">Phone</label>
+                <input type="tel" id="pt-phone" name="phone" placeholder="(407) 555-0100">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="pt-address">Business Address</label>
+              <input type="text" id="pt-address" name="address" placeholder="123 Main St, Orlando, FL">
+            </div>
+            <div class="form-group">
+              <label for="pt-message">Additional Information</label>
+              <textarea id="pt-message" name="message" rows="4" placeholder="Tell us about your business and how you'd like to get involved…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="partner-submit">
+              <span class="btn-text">Send Inquiry</span>
+            </button>
+          </form>
+
+          <div class="pt-form-success" id="partner-success">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h4>Inquiry Sent!</h4>
+            <p>Thanks for reaching out. We'll be in touch within 2 business days to discuss partnership options.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="footer-logo">
+          <p>Training boxers of all ages and skill levels in Oviedo, FL. Discipline, strength, and resilience — forged one round at a time.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/eliteboxingfitnesscenter_" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/EliteBoxingFitnessCenter" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@eliteboxingoviedo" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="index.html#programs">Juniors (6–10)</a></li>
+            <li><a href="index.html#programs">Youth (11–17)</a></li>
+            <li><a href="index.html#programs">Adults (18+)</a></li>
+            <li><a href="index.html#programs">Masters (35+)</a></li>
+            <li><a href="index.html#programs">Personal Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="calendar.html">Schedule</a></li>
+            <li><a href="memberships.html">Memberships</a></li>
+            <li><a href="ebyc.html">EBYC Non-Profit</a></li>
+            <li><a href="partners.html">Elite Partners</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>2462 W State Rd 426 #1038<br>Oviedo, FL 32765</p>
+          <p><a href="tel:4072308235">(407) 230-8235</a></p>
+          <p><a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Elite Boxing Fitness Center. All rights reserved.</p>
+        <p><a href="https://www.eliteboxingoviedo.com" target="_blank" rel="noopener">eliteboxingoviedo.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Nav scroll */
+    const nav = document.getElementById('nav');
+    ScrollTrigger.create({
+      start: 'top -60',
+      onEnter: () => nav.classList.add('scrolled'),
+      onLeaveBack: () => nav.classList.remove('scrolled'),
+    });
+
+    /* Hamburger */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link, .mobile-cta').forEach(l => {
+      l.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* Scroll progress */
+    const progressLine = document.createElement('div');
+    progressLine.style.cssText = 'position:fixed;top:0;left:0;height:2px;z-index:200;background:#f0b429;width:0%;pointer-events:none;box-shadow:0 0 8px rgba(240,180,41,0.6);';
+    document.body.prepend(progressLine);
+    gsap.to(progressLine, { width: '100%', ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom bottom', scrub: 0.3 } });
+
+    /* Hero entrance */
+    if (!prefersReducedMotion) {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.fromTo('.pt-tagline', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.2)
+        .fromTo('.pt-title',   { opacity: 0, y: 50, skewY: 2 }, { opacity: 1, y: 0, skewY: 0, duration: 0.85 }, 0.4)
+        .fromTo('.pt-sub',     { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, 0.75)
+        .fromTo('.pt-hero .btn', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 1.0);
+    }
+
+    /* Scroll reveals */
+    gsap.utils.toArray('.reveal-up').forEach((el, i) => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 88%', once: true,
+        onEnter: () => {
+          if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+          gsap.fromTo(el, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: (i % 3) * 0.08 });
+        },
+      });
+    });
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => {
+          if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+          gsap.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.85, ease: 'power3.out' });
+        },
+      });
+    });
+    gsap.utils.toArray('.reveal-right').forEach(el => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => {
+          if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+          gsap.fromTo(el, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.85, ease: 'power3.out' });
+        },
+      });
+    });
+
+    /* Partner inquiry form */
+    const form        = document.getElementById('partner-form');
+    const success     = document.getElementById('partner-success');
+    const submitBtn   = document.getElementById('partner-submit');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const company = document.getElementById('company').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const email   = document.getElementById('pt-email').value.trim();
+      if (!company || !contact || !email) {
+        if (!company) shakeField('company');
+        else if (!contact) shakeField('contact');
+        else shakeField('pt-email');
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.btn-text').textContent = 'Sending…';
+      await new Promise(r => setTimeout(r, 900));
+      form.style.display = 'none';
+      success.style.display = 'block';
+      if (!prefersReducedMotion) {
+        gsap.fromTo(success, { opacity: 0, y: 12, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' });
+      }
+    });
+
+    function shakeField(id) {
+      const el = document.getElementById(id);
+      if (!el || prefersReducedMotion) { el?.focus(); return; }
+      gsap.fromTo(el, { x: 0 }, {
+        x: 10, duration: 0.08, repeat: 5, yoyo: true, ease: 'power2.inOut',
+        onComplete: () => { gsap.set(el, { x: 0 }); el.focus(); },
+      });
+      el.style.borderColor = '#f0b429';
+      el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
+    }
+  </script>
+</body>
+</html>

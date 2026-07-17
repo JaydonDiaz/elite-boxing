@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule — Elite Boxing Fitness Center</title>
+  <meta name="description" content="Weekly class schedule for Elite Boxing Fitness Center in Oviedo, FL. Find boxing classes for Juniors, Youth, Adults, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================================
+       CALENDAR PAGE
+       ============================================================ */
+    .cal-hero {
+      padding: calc(var(--nav-h) + 72px) 0 64px;
+      background: var(--bg-dark);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cal-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(240,180,41,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cal-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(44px, 8vw, 80px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1;
+      margin: 12px 0 20px;
+    }
+    .cal-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Legend */
+    .cal-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 28px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-dark);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .legend-dot.adults   { background: #818cf8; }
+    .legend-dot.youth    { background: #34d399; }
+    .legend-dot.juniors  { background: #f0b429; }
+    .legend-dot.featured { background: #f0b429; }
+
+    /* Filters */
+    .cal-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 24px;
+      justify-content: center;
+    }
+    .cal-filter {
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      background: none;
+    }
+    .cal-filter:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+    .cal-filter[data-cat="all"].active    { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: #fff; }
+    .cal-filter[data-cat="adults"].active  { background: rgba(99,102,241,0.2);  border-color: #818cf8; color: #818cf8; }
+    .cal-filter[data-cat="youth"].active   { background: rgba(16,185,129,0.2);  border-color: #34d399; color: #34d399; }
+    .cal-filter[data-cat="juniors"].active { background: rgba(240,180,41,0.2);  border-color: #f0b429; color: #f0b429; }
+
+    /* Grid wrapper */
+    .cal-section {
+      padding: 0 24px 80px;
+    }
+    .cal-scroll-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    /* 8 columns: time label + 7 days */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: 78px repeat(7, minmax(118px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      min-width: 900px;
+    }
+
+    /* Header row */
+    .cal-day-header {
+      background: var(--surface-2);
+      padding: 14px 10px;
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .cal-day-header.closed-header {
+      color: var(--muted-2);
+    }
+    .cal-corner { background: var(--surface-2); }
+
+    /* Time label */
+    .cal-time {
+      background: var(--surface);
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1px;
+    }
+    .time-hour   { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+    .time-period { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* Class cells */
+    .cal-cell {
+      background: var(--bg);
+      padding: 7px;
+      min-height: 96px;
+    }
+    .cal-cell.closed {
+      background: rgba(255,255,255,0.01);
+    }
+
+    /* Class blocks */
+    .cal-class {
+      border-radius: 9px;
+      padding: 10px 11px;
+      height: 100%;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-left: 3px solid;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cal-class:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .cal-class.adults   { background: rgba(99,102,241,0.12); border-color: #818cf8; }
+    .cal-class.youth    { background: rgba(16,185,129,0.12); border-color: #34d399; }
+    .cal-class.juniors  { background: rgba(240,180,41,0.12); border-color: #f0b429; }
+    .cal-class.featured { background: rgba(240,180,41,0.12); border-color: #f0b429; }
+
+    .cal-class.filtered-out { display: none; }
+
+    .cal-class-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .cal-class.adults   .cal-class-name { color: #a5b4fc; }
+    .cal-class.youth    .cal-class-name { color: #6ee7b7; }
+    .cal-class.juniors  .cal-class-name { color: #fcd34d; }
+    .cal-class.featured .cal-class-name { color: #f0b429; }
+
+    .cal-class-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      opacity: 0.6;
+      line-height: 1.3;
+    }
+    .cal-class-dur {
+      font-size: 11px;
+      opacity: 0.45;
+      margin-top: auto;
+    }
+
+    /* Closed/Sunday column cells */
+    .cal-cell.closed .cal-empty {
+      width: 100%; height: 100%;
+      min-height: 80px;
+    }
+    .cal-cell.closed-day {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* Note */
+    .cal-note {
+      max-width: 1280px;
+      margin: 20px auto 0;
+      padding: 0 2px;
+      font-size: 13px;
+      color: var(--muted-2);
+      line-height: 1.7;
+    }
+    .cal-note a { color: var(--red); }
+
+    /* CTA */
+    .cal-cta {
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+    }
+    .cal-cta h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .cal-cta p { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+    .cal-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 640px) {
+      .cal-hero { padding: calc(var(--nav-h) + 48px) 0 48px; }
+      .cal-legend { gap: 14px; padding: 18px 16px; }
+      .cal-filters { padding: 16px; gap: 6px; }
+      .cal-filter { padding: 6px 14px; font-size: 11px; }
+      .cal-section { padding: 0 12px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav" class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+        <li><a href="calendar.html" class="nav-link active">Schedule</a></li>
+        <li><a href="index.html#coaches" class="nav-link">Coaches</a></li>
+        <li><a href="index.html#memberships" class="nav-link">Memberships</a></li>
+        <li><a href="ebyc.html" class="nav-link">EBYC</a></li>
+        <li><a href="partners.html" class="nav-link">Partners</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="signup.html" class="nav-link nav-link--signup">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-sm nav-cta">Join Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <ul>
+        <li><a href="index.html#about" class="mobile-link">About</a></li>
+        <li><a href="index.html#programs" class="mobile-link">Programs</a></li>
+        <li><a href="calendar.html" class="mobile-link">Schedule</a></li>
+        <li><a href="index.html#coaches" class="mobile-link">Coaches</a></li>
+        <li><a href="index.html#memberships" class="mobile-link">Memberships</a></li>
+        <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
+        <li><a href="partners.html" class="mobile-link">Partners</a></li>
+        <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        <li><a href="signup.html" class="mobile-link" style="color:var(--red);font-weight:600;">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-full mobile-cta">Join Now</a>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="cal-hero">
+    <div class="container">
+      <span class="section-tag cal-tag">Weekly Program</span>
+      <h1 class="cal-title">Class <span class="text-red">Schedule</span></h1>
+      <p class="cal-sub">Find the right class for your age and goals. New members welcome Monday, Tuesday, and Wednesday.</p>
+    </div>
+  </section>
+
+  <!-- Legend -->
+  <div class="cal-legend">
+    <div class="legend-item">
+      <div class="legend-dot juniors"></div>
+      <span>Juniors (6–10)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot youth"></div>
+      <span>Youth (11–17)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot adults"></div>
+      <span>Adults (18+)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot featured"></div>
+      <span>Invite Only</span>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="cal-filters">
+    <button class="cal-filter active" data-cat="all">All Classes</button>
+    <button class="cal-filter" data-cat="juniors">Juniors</button>
+    <button class="cal-filter" data-cat="youth">Youth</button>
+    <button class="cal-filter" data-cat="adults">Adults</button>
+  </div>
+
+  <!-- ===== CALENDAR GRID ===== -->
+  <section class="cal-section">
+    <div class="cal-scroll-wrap">
+      <div class="cal-grid" id="cal-grid">
+
+        <!-- ── HEADER ROW ── -->
+        <div class="cal-corner"></div>
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+        <div class="cal-day-header">Sat</div>
+        <div class="cal-day-header closed-header">Sun</div>
+
+        <!-- ── 10:00 AM ── -->
+        <div class="cal-time"><span class="time-hour">10:00</span><span class="time-period">AM</span></div>
+        <!-- Mon --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Tue --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Wed --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Thu -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Homeschool</span>
+            <span class="cal-class-tag">Ages 7–17</span>
+            <span class="cal-class-dur">60 min</span>
+          </div>
+        </div>
+        <!-- Fri --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sat --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+        <!-- ── 11:00 AM ── -->
+        <div class="cal-time"><span class="time-hour">11:00</span><span class="time-period">AM</span></div>
+        <!-- Mon --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Tue --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Wed --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Thu --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Fri --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sat -->
+        <div class="cal-cell">
+          <div class="cal-class featured" data-cat="featured">
+            <span class="cal-class-name">Sparring</span>
+            <span class="cal-class-tag">Invite Only</span>
+            <span class="cal-class-dur">60 min</span>
+          </div>
+        </div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+        <!-- ── 12:00 PM ── -->
+        <div class="cal-time"><span class="time-hour">12:00</span><span class="time-period">PM</span></div>
+        <!-- Mon -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Tue -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Wed -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Thu -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Fri -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Sat --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+        <!-- ── 5:00 PM ── -->
+        <div class="cal-time"><span class="time-hour">5:00</span><span class="time-period">PM</span></div>
+        <!-- Mon -->
+        <div class="cal-cell">
+          <div class="cal-class juniors" data-cat="juniors">
+            <span class="cal-class-name">Junior Boxing</span>
+            <span class="cal-class-tag">Juniors 6–10</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Tue --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Wed -->
+        <div class="cal-cell">
+          <div class="cal-class juniors" data-cat="juniors">
+            <span class="cal-class-name">Junior Boxing</span>
+            <span class="cal-class-tag">Juniors 6–10</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Thu --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Fri -->
+        <div class="cal-cell">
+          <div class="cal-class juniors" data-cat="juniors">
+            <span class="cal-class-name">Junior Boxing</span>
+            <span class="cal-class-tag">Juniors 6–10</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Sat --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+        <!-- ── 6:00 PM ── -->
+        <div class="cal-time"><span class="time-hour">6:00</span><span class="time-period">PM</span></div>
+        <!-- Mon -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Youth Boxing</span>
+            <span class="cal-class-tag">Youth 11–17</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Tue -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Youth Boxing</span>
+            <span class="cal-class-tag">Youth 11–17</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Wed -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Youth Boxing</span>
+            <span class="cal-class-tag">Youth 11–17</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Thu -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Youth Sparring</span>
+            <span class="cal-class-tag">Youth 11–17</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Fri -->
+        <div class="cal-cell">
+          <div class="cal-class youth" data-cat="youth">
+            <span class="cal-class-name">Youth Boxing</span>
+            <span class="cal-class-tag">Youth 11–17</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Sat --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+        <!-- ── 7:00 PM ── -->
+        <div class="cal-time"><span class="time-hour">7:00</span><span class="time-period">PM</span></div>
+        <!-- Mon -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Tue -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Wed -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Thu -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Sparring</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Fri -->
+        <div class="cal-cell">
+          <div class="cal-class adults" data-cat="adults">
+            <span class="cal-class-name">Adult Technique</span>
+            <span class="cal-class-tag">Adults 18+</span>
+            <span class="cal-class-dur">45 min</span>
+          </div>
+        </div>
+        <!-- Sat --> <div class="cal-cell"><div class="cal-empty"></div></div>
+        <!-- Sun --> <div class="cal-cell closed"><div class="cal-empty"></div></div>
+
+      </div><!-- /cal-grid -->
+    </div><!-- /cal-scroll-wrap -->
+
+    <p class="cal-note">
+      * New members welcome Monday, Tuesday, and Wednesday. Invite-only sparring on Saturday requires coach approval. Contact us at <a href="tel:4072308235">(407) 230-8235</a> or <a href="https://instagram.com/eliteboxingfitnesscenter_" target="_blank" rel="noopener">@eliteboxingfitnesscenter_</a> to confirm current times.
+    </p>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cal-cta">
+    <div class="container">
+      <h2>Ready to <span class="text-red">Get Started?</span></h2>
+      <p>Show up to any class and let us take care of the rest.</p>
+      <div class="cal-cta-actions">
+        <a href="index.html#memberships" class="btn btn-primary btn-lg">View Memberships</a>
+        <a href="index.html#contact" class="btn btn-ghost btn-lg">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="footer-logo">
+          <p>Training boxers of all ages and skill levels in Oviedo, FL. Discipline, strength, and resilience — forged one round at a time.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/eliteboxingfitnesscenter_" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/EliteBoxingFitnessCenter" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@eliteboxingoviedo" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="index.html#programs">Juniors (6–10)</a></li>
+            <li><a href="index.html#programs">Youth (11–17)</a></li>
+            <li><a href="index.html#programs">Adults (18+)</a></li>
+            <li><a href="index.html#programs">Masters (35+)</a></li>
+            <li><a href="index.html#programs">Personal Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="calendar.html">Schedule</a></li>
+            <li><a href="index.html#coaches">Coaches</a></li>
+            <li><a href="index.html#memberships">Memberships</a></li>
+            <li><a href="index.html#nonprofit">EBYC Non-Profit</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>2462 W State Rd 426 #1038<br>Oviedo, FL 32765</p>
+          <p><a href="tel:4072308235">(407) 230-8235</a></p>
+          <p><a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Elite Boxing Fitness Center. All rights reserved.</p>
+        <p><a href="https://www.eliteboxingoviedo.com" target="_blank" rel="noopener">eliteboxingoviedo.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Nav scroll */
+    const nav = document.getElementById('nav');
+    ScrollTrigger.create({
+      start: 'top -60',
+      onEnter: () => nav.classList.add('scrolled'),
+      onLeaveBack: () => nav.classList.remove('scrolled'),
+    });
+
+    /* Hamburger */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link, .mobile-cta').forEach(l => {
+      l.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* Scroll progress line */
+    const progressLine = document.createElement('div');
+    progressLine.style.cssText = 'position:fixed;top:0;left:0;height:2px;z-index:200;background:#f0b429;width:0%;pointer-events:none;box-shadow:0 0 8px rgba(240,180,41,0.6);';
+    document.body.prepend(progressLine);
+    gsap.to(progressLine, { width: '100%', ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom bottom', scrub: 0.3 } });
+
+    /* Hero entrance */
+    if (!prefersReducedMotion) {
+      gsap.fromTo('.cal-tag',   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2 });
+      gsap.fromTo('.cal-title', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.35, ease: 'power3.out' });
+      gsap.fromTo('.cal-sub',   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.55 });
+    }
+
+    /* Grid entrance */
+    ScrollTrigger.create({
+      trigger: '.cal-scroll-wrap',
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        if (prefersReducedMotion) return;
+        gsap.fromTo('.cal-scroll-wrap', { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' });
+        gsap.fromTo('.cal-class', { opacity: 0, scale: 0.93 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: 'power2.out', delay: 0.2 });
+      },
+    });
+
+    /* Category filter */
+    const filters    = document.querySelectorAll('.cal-filter');
+    const allClasses = document.querySelectorAll('.cal-class');
+
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+
+        allClasses.forEach(cls => {
+          const match = cat === 'all' || cls.dataset.cat === cat;
+          if (!prefersReducedMotion) {
+            if (match) {
+              cls.classList.remove('filtered-out');
+              gsap.fromTo(cls, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out' });
+            } else {
+              gsap.to(cls, { opacity: 0, scale: 0.9, duration: 0.18, ease: 'power2.in',
+                onComplete: () => cls.classList.add('filtered-out') });
+            }
+          } else {
+            cls.classList.toggle('filtered-out', !match);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

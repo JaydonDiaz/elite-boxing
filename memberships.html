@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memberships — Elite Boxing Fitness Center</title>
+  <meta name="description" content="Flexible membership plans for every schedule and budget at Elite Boxing Fitness Center in Oviedo, FL. Month-to-month, multi-month, drop-ins, and homeschool options.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================================
+       MEMBERSHIPS PAGE
+       ============================================================ */
+    .mem-hero {
+      padding: calc(var(--nav-h) + 72px) 0 72px;
+      background: var(--bg-dark);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .mem-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(240,180,41,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mem-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(44px, 8vw, 80px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1;
+      margin: 12px 0 20px;
+    }
+    .mem-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ---- Section wrappers ---- */
+    .mem-section {
+      padding: 80px 0;
+    }
+    .mem-section.bg-dark { background: var(--bg-dark); }
+    .mem-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .mem-section-header h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 8px 0 12px;
+    }
+    .mem-section-header p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---- Main plans: 3-col grid ---- */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Reuse pricing-card but make them taller/richer */
+    .plans-grid .pricing-card {
+      padding: 32px 28px 28px;
+    }
+    .plans-grid .pricing-card--featured {
+      padding: 40px 28px 32px;
+      transform: translateY(-8px);
+    }
+    .plans-grid .pricing-card--featured:hover {
+      transform: translateY(-12px);
+    }
+    .pricing-header h3 {
+      font-size: 13px;
+    }
+    .price-per-mo {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .price-per-mo span { color: var(--red); font-weight: 600; }
+
+    /* ---- Drop-ins & Passes: 4-col grid ---- */
+    .passes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .pass-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .pass-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .pass-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(240,180,41,0.1);
+      border: 1px solid rgba(240,180,41,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .pass-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pass-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .pass-price sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      vertical-align: baseline;
+      margin-left: 2px;
+    }
+    .pass-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .pass-card .btn { margin-top: 8px; }
+
+    /* ---- Homeschool ---- */
+    .homeschool-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .homeschool-text h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 8px 0 16px;
+      line-height: 1.1;
+    }
+    .homeschool-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .homeschool-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hs-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      transition: border-color var(--transition);
+    }
+    .hs-option:hover { border-color: var(--red); }
+    .hs-option-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .hs-option-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--red);
+    }
+    .hs-option-period {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      margin-left: 4px;
+    }
+
+    /* ---- FAQ / Notes ---- */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .faq-q {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .faq-q svg { color: var(--red); flex-shrink: 0; margin-top: 2px; }
+    .faq-a {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 24px;
+    }
+
+    /* ---- Bottom CTA ---- */
+    .mem-cta {
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .mem-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(240,180,41,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mem-cta h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .mem-cta p { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+    .mem-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .plans-grid .pricing-card--featured { transform: none; }
+      .plans-grid .pricing-card--featured:hover { transform: translateY(-4px); }
+      .passes-grid { grid-template-columns: repeat(2, 1fr); }
+      .homeschool-wrap { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .passes-grid { grid-template-columns: 1fr; }
+      .mem-hero { padding: calc(var(--nav-h) + 48px) 0 52px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav" class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#programs" class="nav-link">Programs</a></li>
+        <li><a href="calendar.html" class="nav-link">Schedule</a></li>
+        <li><a href="index.html#coaches" class="nav-link">Coaches</a></li>
+        <li><a href="memberships.html" class="nav-link active">Memberships</a></li>
+        <li><a href="ebyc.html" class="nav-link">EBYC</a></li>
+        <li><a href="partners.html" class="nav-link">Partners</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="signup.html" class="nav-link nav-link--signup">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-sm nav-cta">Join Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <ul>
+        <li><a href="index.html#about" class="mobile-link">About</a></li>
+        <li><a href="index.html#programs" class="mobile-link">Programs</a></li>
+        <li><a href="calendar.html" class="mobile-link">Schedule</a></li>
+        <li><a href="index.html#coaches" class="mobile-link">Coaches</a></li>
+        <li><a href="memberships.html" class="mobile-link">Memberships</a></li>
+        <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
+        <li><a href="partners.html" class="mobile-link">Partners</a></li>
+        <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        <li><a href="signup.html" class="mobile-link" style="color:var(--red);font-weight:600;">Sign Up</a></li>
+      </ul>
+      <a href="signup.html" class="btn btn-primary btn-full mobile-cta">Join Now</a>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="mem-hero">
+    <div class="container">
+      <span class="section-tag">Pricing</span>
+      <h1 class="mem-title">Membership <span class="text-red">Plans</span></h1>
+      <p class="mem-sub">Flexible options for every schedule and budget. Family discounts available for 2+ members.</p>
+    </div>
+  </section>
+
+  <!-- ===== MAIN PLANS ===== -->
+  <section class="mem-section">
+    <div class="container">
+      <div class="mem-section-header reveal-up">
+        <span class="section-tag">Memberships</span>
+        <h2>Choose Your <span class="text-red">Commitment</span></h2>
+        <p>All plans include unlimited access to every group class. Longer commitment = lower monthly rate.</p>
+      </div>
+
+      <div class="plans-grid">
+
+        <div class="pricing-card reveal-up">
+          <div class="pricing-header">
+            <h3>1-Month</h3>
+            <div class="pricing-amount">
+              <span class="price">$200</span>
+              <span class="period">/ month</span>
+            </div>
+            <p class="pricing-desc">Maximum flexibility. Pay month to month with no long-term commitment.</p>
+          </div>
+          <ul class="pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited class access</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>All programs included</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No card on file</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No recurring payments</li>
+          </ul>
+          <a href="signup.html?plan=1month" class="btn btn-outline btn-full">Get Started</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured reveal-up">
+          <div class="pricing-badge">Best Value</div>
+          <div class="pricing-header">
+            <h3>6-Month Plan</h3>
+            <div class="pricing-amount">
+              <span class="price">$145</span>
+              <span class="period">/ month</span>
+            </div>
+            <p class="pricing-desc">Our lowest monthly rate. Six automatic payments — set it and forget it.</p>
+            <p class="price-per-mo">Save <span>$55/mo</span> vs. month-to-month</p>
+          </div>
+          <ul class="pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited class access</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>All programs included</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>6 monthly auto-payments</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Card on file required</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Best per-month rate</li>
+          </ul>
+          <a href="signup.html?plan=6month" class="btn btn-primary btn-full">Join Now</a>
+        </div>
+
+        <div class="pricing-card reveal-up">
+          <div class="pricing-header">
+            <h3>3-Month Plan</h3>
+            <div class="pricing-amount">
+              <span class="price">$500</span>
+              <span class="period">paid in full</span>
+            </div>
+            <p class="pricing-desc">Pay once, train for three months. No card on file, no recurring charges.</p>
+            <p class="price-per-mo">~<span>$167/mo</span> effective rate</p>
+          </div>
+          <ul class="pricing-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited class access</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>All programs included</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Single one-time payment</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No card on file required</li>
+          </ul>
+          <a href="signup.html?plan=3month" class="btn btn-outline btn-full">Join Now</a>
+        </div>
+
+      </div>
+
+      <div class="pricing-note reveal-up">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Registration required before checkout for all monthly plans. Family discounts available — contact us at <a href="tel:4072308235">(407) 230-8235</a> when registering 2+ members.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DROP-INS & PASSES ===== -->
+  <section class="mem-section bg-dark">
+    <div class="container">
+      <div class="mem-section-header reveal-up">
+        <span class="section-tag">Try Us First</span>
+        <h2>Drop-Ins <span class="text-red">&amp; Passes</span></h2>
+        <p>Not ready to commit? Start with a single class or a short pass and see if we're the right fit.</p>
+      </div>
+
+      <div class="passes-grid">
+
+        <div class="pass-card reveal-up">
+          <div class="pass-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="pass-name">First Class</div>
+          <div class="pass-price">$25</div>
+          <p class="pass-desc">Your first 45-minute group class. Prior boxing experience recommended but not required.</p>
+          <a href="signup.html?plan=firstclass" class="btn btn-outline btn-full">Book Now</a>
+        </div>
+
+        <div class="pass-card reveal-up">
+          <div class="pass-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="pass-name">1-on-1 Intro</div>
+          <div class="pass-price">$45</div>
+          <p class="pass-desc">30-minute private session covering boxing fundamentals. Ideal for complete beginners.</p>
+          <a href="signup.html?plan=intro" class="btn btn-outline btn-full">Book Session</a>
+        </div>
+
+        <div class="pass-card reveal-up">
+          <div class="pass-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="pass-name">1-Week Pass</div>
+          <div class="pass-price">$100</div>
+          <p class="pass-desc">7 days of unlimited class access from first use. Great for visitors or testing the waters.</p>
+          <a href="signup.html?plan=weekpass" class="btn btn-outline btn-full">Get Pass</a>
+        </div>
+
+        <div class="pass-card reveal-up">
+          <div class="pass-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="pass-name">Drop-In</div>
+          <div class="pass-price">$30</div>
+          <p class="pass-desc">Single class pass for returning visitors. Valid for any group class after your initial visit.</p>
+          <a href="signup.html?plan=dropin" class="btn btn-outline btn-full">Drop In</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOMESCHOOL ===== -->
+  <section class="mem-section">
+    <div class="container">
+      <div class="homeschool-wrap">
+        <div class="homeschool-text reveal-left">
+          <span class="section-tag">Homeschool Program</span>
+          <h2>Daytime Classes for <span class="text-red">Ages 7–17</span></h2>
+          <p>Our Thursday 10 AM homeschool class offers structured boxing training during school hours. Two classes per week. Choose the payment option that works for your family.</p>
+          <a href="index.html#contact" class="btn btn-primary">Enroll Now</a>
+        </div>
+        <div class="homeschool-options reveal-right">
+          <div class="hs-option">
+            <div>
+              <div class="hs-option-label">Drop-In</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">Per session, any time</div>
+            </div>
+            <div>
+              <span class="hs-option-price">$30</span>
+              <span class="hs-option-period">/ class</span>
+            </div>
+          </div>
+          <div class="hs-option">
+            <div>
+              <div class="hs-option-label">Weekly</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">2 classes per week</div>
+            </div>
+            <div>
+              <span class="hs-option-price">$50</span>
+              <span class="hs-option-period">/ week</span>
+            </div>
+          </div>
+          <div class="hs-option">
+            <div>
+              <div class="hs-option-label">Monthly</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">Best rate, 2 classes per week</div>
+            </div>
+            <div>
+              <span class="hs-option-price">$160</span>
+              <span class="hs-option-period">/ month</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="mem-section bg-dark">
+    <div class="container">
+      <div class="mem-section-header reveal-up">
+        <span class="section-tag">Good to Know</span>
+        <h2>Common <span class="text-red">Questions</span></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item reveal-up">
+          <div class="faq-q">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Do I need experience to join?
+          </div>
+          <p class="faq-a">No experience needed for most classes. New members are encouraged to start on Monday, Tuesday, or Wednesday. Complete beginners may want to book the $45 1-on-1 intro session first.</p>
+        </div>
+        <div class="faq-item reveal-up">
+          <div class="faq-q">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            What's included in all plans?
+          </div>
+          <p class="faq-a">All membership plans give you unlimited access to every group class — Adult Technique, Junior Boxing, Youth Boxing, Youth Sparring, and Adult Sparring (Thursday). No per-class fees.</p>
+        </div>
+        <div class="faq-item reveal-up">
+          <div class="faq-q">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Are family discounts available?
+          </div>
+          <p class="faq-a">Yes — group discounts are available for families enrolling 2 or more members. Contact us directly at <a href="tel:4072308235" style="color:var(--red)">(407) 230-8235</a> when signing up to get the family rate.</p>
+        </div>
+        <div class="faq-item reveal-up">
+          <div class="faq-q">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            How does the 6-month plan work?
+          </div>
+          <p class="faq-a">The 6-month plan charges $145 automatically each month for six months via the card on file. Registration is required before checkout. It's the most cost-effective option if you're committed to training.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="mem-cta">
+    <div class="container">
+      <h2>Ready to <span class="text-red">Start Training?</span></h2>
+      <p>Reach out and we'll get you set up with the right plan for your goals.</p>
+      <div class="mem-cta-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-lg">Contact Us</a>
+        <a href="calendar.html" class="btn btn-ghost btn-lg">View Schedule</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_200,h_175,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png" alt="Elite Boxing Logo" class="footer-logo">
+          <p>Training boxers of all ages and skill levels in Oviedo, FL. Discipline, strength, and resilience — forged one round at a time.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/eliteboxingfitnesscenter_" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/EliteBoxingFitnessCenter" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@eliteboxingoviedo" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="index.html#programs">Juniors (6–10)</a></li>
+            <li><a href="index.html#programs">Youth (11–17)</a></li>
+            <li><a href="index.html#programs">Adults (18+)</a></li>
+            <li><a href="index.html#programs">Masters (35+)</a></li>
+            <li><a href="index.html#programs">Personal Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="calendar.html">Schedule</a></li>
+            <li><a href="index.html#coaches">Coaches</a></li>
+            <li><a href="memberships.html">Memberships</a></li>
+            <li><a href="index.html#nonprofit">EBYC Non-Profit</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>2462 W State Rd 426 #1038<br>Oviedo, FL 32765</p>
+          <p><a href="tel:4072308235">(407) 230-8235</a></p>
+          <p><a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Elite Boxing Fitness Center. All rights reserved.</p>
+        <p><a href="https://www.eliteboxingoviedo.com" target="_blank" rel="noopener">eliteboxingoviedo.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Nav scroll */
+    const nav = document.getElementById('nav');
+    ScrollTrigger.create({
+      start: 'top -60',
+      onEnter: () => nav.classList.add('scrolled'),
+      onLeaveBack: () => nav.classList.remove('scrolled'),
+    });
+
+    /* Hamburger */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link, .mobile-cta').forEach(l => {
+      l.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* Scroll progress */
+    const progressLine = document.createElement('div');
+    progressLine.style.cssText = 'position:fixed;top:0;left:0;height:2px;z-index:200;background:#f0b429;width:0%;pointer-events:none;box-shadow:0 0 8px rgba(240,180,41,0.6);';
+    document.body.prepend(progressLine);
+    gsap.to(progressLine, { width: '100%', ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom bottom', scrub: 0.3 } });
+
+    /* Hero entrance */
+    if (!prefersReducedMotion) {
+      gsap.fromTo('.mem-hero .section-tag', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.2 });
+      gsap.fromTo('.mem-title', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.35, ease: 'power3.out' });
+      gsap.fromTo('.mem-sub',   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.55 });
+    }
+
+    /* Scroll reveals */
+    revealUp('.reveal-up');
+    function revealUp(selector) {
+      gsap.utils.toArray(selector).forEach((el, i) => {
+        ScrollTrigger.create({
+          trigger: el, start: 'top 88%', once: true,
+          onEnter: () => {
+            if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+            gsap.fromTo(el, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.04 });
+          },
+        });
+      });
+    }
+
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => {
+          if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+          gsap.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
+        },
+      });
+    });
+    gsap.utils.toArray('.reveal-right').forEach(el => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => {
+          if (prefersReducedMotion) { gsap.set(el, { opacity: 1 }); return; }
+          gsap.fromTo(el, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
+        },
+      });
+    });
+  </script>
+</body>
+</html>
