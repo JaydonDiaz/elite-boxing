@@ -219,7 +219,7 @@ const PROGRAMS = [
   {
     name: 'Masters',
     age: 'Ages 35+',
-    img: 'https://static.wixstatic.com/media/66b2d7_efd540dd62ef4b30aad86173427ca9df~mv2.jpg/v1/fill/w_800,h_1100,al_t,q_85,enc_avif,quality_auto/IMG_9403.jpg',
+    img: 'https://static.wixstatic.com/media/66b2d7_006b22f990324a63bd3ddf07c5567085~mv2.jpeg/v1/fill/w_800,h_1100,al_c,q_85,enc_avif,quality_auto/66b2d7_006b22f990324a63bd3ddf07c5567085~mv2.jpeg',
     desc: 'Specialized boxing for adults 35+. Modified intensity with full technique — stay sharp, fit, and powerful at any age.',
     features: ['Age-appropriate intensity', 'Full technique training', 'Supportive community'],
     ctaText: 'Get Started →',

@@ -212,7 +212,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
-      align-items: start;
+      align-items: stretch;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -221,6 +221,8 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
     }
     .elig-block h3 {
       font-family: 'Oswald', sans-serif;
