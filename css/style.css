@@ -1234,7 +1234,7 @@ html[data-theme="light"] .footer-logo { filter: invert(1); }
   .stat-item { min-width: 50%; }
   .hero-title { font-size: clamp(44px, 12vw, 72px); }
   .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-card { grid-column: 1 / -1 !important; }
+  .pricing-card { grid-column: 1 / -1 !important; grid-row: auto !important; }
   .prog-grid { grid-template-columns: repeat(3, 1fr); }
   .overlay-panel { grid-template-columns: 1fr; }
   .overlay-img-wrap { min-height: 220px; max-height: 220px; }
