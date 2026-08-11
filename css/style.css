@@ -209,6 +209,7 @@ html[data-theme="light"] .nav--photo:not(.scrolled) .logo-img { filter: none; }
   display: flex;
   gap: 28px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 .nav-link {
   font-size: 13px;
@@ -218,6 +219,8 @@ html[data-theme="light"] .nav--photo:not(.scrolled) .logo-img { filter: none; }
   text-transform: uppercase;
   transition: color var(--transition);
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-link::after {
   content: '';
@@ -774,7 +777,7 @@ html[data-theme="light"] .theme-icon--moon { display: none; }
 .class-badge.youth  { background: rgba(16,185,129,0.2); color: #34d399; }
 .class-badge.juniors{ background: rgba(240,180,41,0.2); color: #f0b429; }
 .class-badge.masters{ background: rgba(212,21,41,0.2);  color: #f87171; }
-.class-badge.featured{ background: rgba(240,180,41,0.2); color: #f0b429; }
+.class-badge.featured{ background: rgba(212,21,41,0.2);  color: #f87171; }
 .class-duration {
   font-size: 12px;
   color: var(--muted);
@@ -1048,7 +1051,6 @@ blockquote {
   font-style: italic;
   flex: 1;
 }
-blockquote::before { content: '\201C'; color: var(--red-text); font-size: 28px; line-height: 0; vertical-align: -12px; margin-right: 2px; }
 .testimonial-author { display: flex; align-items: center; gap: 12px; }
 .author-avatar {
   width: 44px; height: 44px;
@@ -1217,6 +1219,11 @@ html[data-theme="light"] .footer-logo { filter: invert(1); }
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width: 1150px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+}
+
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1224,8 +1231,6 @@ html[data-theme="light"] .footer-logo { filter: invert(1); }
 @media (max-width: 768px) {
   :root { --nav-h: 64px; }
   .section-padding { padding: 72px 0; }
-  .nav-links, .nav-cta { display: none; }
-  .hamburger { display: flex; }
   .about-grid, .nonprofit-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-badge { bottom: 16px; right: 16px; }
   .coaches-grid { grid-template-columns: 1fr; gap: 20px; }
