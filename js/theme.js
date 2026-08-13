@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var next = current === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
   });
 });

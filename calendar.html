@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="js/theme.js"></script>
+  <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_64,h_64,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class Schedule — Elite Boxing Fitness Center</title>
   <meta name="description" content="Weekly class schedule for Elite Boxing Fitness Center in Oviedo, FL. Find boxing classes for Juniors, Youth, Adults, and more.">
@@ -97,9 +98,10 @@
     }
     .cal-filter:hover { border-color: var(--border-hover); color: var(--text); }
     .cal-filter[data-cat="all"].active    { background: rgba(var(--text-rgb),0.1); border-color: rgba(var(--text-rgb),0.3); color: var(--text); }
-    .cal-filter[data-cat="adults"].active  { background: rgba(99,102,241,0.2);  border-color: #818cf8; color: #818cf8; }
-    .cal-filter[data-cat="youth"].active   { background: rgba(16,185,129,0.2);  border-color: #34d399; color: #34d399; }
-    .cal-filter[data-cat="juniors"].active { background: rgba(240,180,41,0.2);  border-color: #f0b429; color: #f0b429; }
+    .cal-filter[data-cat="adults"].active  { background: rgba(99,102,241,0.2);  border-color: #818cf8; color: var(--badge-adults); }
+    .cal-filter[data-cat="youth"].active   { background: rgba(16,185,129,0.2);  border-color: #34d399; color: var(--badge-youth); }
+    .cal-filter[data-cat="juniors"].active { background: rgba(240,180,41,0.2);  border-color: #f0b429; color: var(--red-text); }
+    .cal-filter[data-cat="featured"].active { background: rgba(212,21,41,0.2);  border-color: #f87171; color: var(--badge-red); }
 
     /* Grid wrapper */
     .cal-section {
@@ -193,10 +195,10 @@
       letter-spacing: 0.04em;
       line-height: 1.2;
     }
-    .cal-class.adults   .cal-class-name { color: #a5b4fc; }
-    .cal-class.youth    .cal-class-name { color: #6ee7b7; }
-    .cal-class.juniors  .cal-class-name { color: #fcd34d; }
-    .cal-class.featured .cal-class-name { color: #f87171; }
+    .cal-class.adults   .cal-class-name { color: var(--badge-adults); }
+    .cal-class.youth    .cal-class-name { color: var(--badge-youth); }
+    .cal-class.juniors  .cal-class-name { color: var(--red-text); }
+    .cal-class.featured .cal-class-name { color: var(--badge-red); }
 
     .cal-class-tag {
       font-size: 10px;
@@ -339,6 +341,7 @@
     <button class="cal-filter" data-cat="juniors">Juniors</button>
     <button class="cal-filter" data-cat="youth">Youth</button>
     <button class="cal-filter" data-cat="adults">Adults</button>
+    <button class="cal-filter" data-cat="featured">Invite Only</button>
   </div>
 
   <!-- ===== CALENDAR GRID ===== -->
@@ -603,7 +606,7 @@
           </div>
         </div>
         <div class="footer-links">
-          <h4>Programs</h4>
+          <h3>Programs</h3>
           <ul>
             <li><a href="index.html#programs">Juniors (6–10)</a></li>
             <li><a href="index.html#programs">Youth (11–17)</a></li>
@@ -613,7 +616,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Quick Links</h4>
+          <h3>Quick Links</h3>
           <ul>
             <li><a href="index.html#about">About Us</a></li>
             <li><a href="calendar.html">Schedule</a></li>
@@ -623,7 +626,7 @@
           </ul>
         </div>
         <div class="footer-contact">
-          <h4>Contact</h4>
+          <h3>Contact</h3>
           <p>2462 W State Rd 426 #1038<br>Oviedo, FL 32765</p>
           <p><a href="tel:4072308235">(407) 230-8235</a></p>
           <p><a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a></p>

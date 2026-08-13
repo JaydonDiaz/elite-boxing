@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="js/theme.js"></script>
+  <link rel="icon" type="image/png" href="https://static.wixstatic.com/media/66b2d7_4d8a4e97d5f041e3b3e21fe2ddf51c0a~mv2.png/v1/fill/w_64,h_64,al_c,q_90,enc_avif,quality_auto/Elite%20Boxing%20Logo_Final_edited.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join Elite Boxing — Sign Up</title>
   <meta name="description" content="Sign up for Elite Boxing Fitness Center in Oviedo, FL. Choose your membership plan and get started today.">
@@ -110,7 +111,7 @@
     .su-prog-line.filled::after { inset: 0; }
 
     /* Wizard layout */
-    .su-wizard { padding: 52px 0 96px; overflow: hidden; }
+    .su-wizard { padding: 52px 0 96px; overflow: hidden; scroll-margin-top: var(--nav-h); }
     .su-inner  { max-width: 820px; margin: 0 auto; padding: 0 20px; }
     .su-viewport { position: relative; }
     .su-step { width: 100%; top: 0; left: 0; }
@@ -206,7 +207,7 @@
       font-size: 12.5px; color: var(--muted); line-height: 1.8; margin-bottom: 20px;
       scrollbar-width: thin; scrollbar-color: var(--border) transparent;
     }
-    .waiver-box h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
+    .waiver-box h2 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
     .waiver-box p  { margin-bottom: 10px; }
     .waiver-agree  { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; color: rgba(var(--text-rgb),0.8); line-height: 1.5; }
     .waiver-agree input[type="checkbox"] {
@@ -285,6 +286,7 @@
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="index.html#programs" class="nav-link">Programs</a></li>
         <li><a href="calendar.html" class="nav-link">Schedule</a></li>
+        <li><a href="index.html#coaches" class="nav-link">Coaches</a></li>
         <li><a href="memberships.html" class="nav-link">Memberships</a></li>
         <li><a href="ebyc.html" class="nav-link">EBYC</a></li>
         <li><a href="partners.html" class="nav-link">Partners</a></li>
@@ -308,6 +310,7 @@
         <li><a href="index.html#about" class="mobile-link">About</a></li>
         <li><a href="index.html#programs" class="mobile-link">Programs</a></li>
         <li><a href="calendar.html" class="mobile-link">Schedule</a></li>
+        <li><a href="index.html#coaches" class="mobile-link">Coaches</a></li>
         <li><a href="memberships.html" class="mobile-link">Memberships</a></li>
         <li><a href="ebyc.html" class="mobile-link">EBYC</a></li>
         <li><a href="partners.html" class="mobile-link">Partners</a></li>
@@ -357,7 +360,7 @@
             </div>
             <div class="plan-options">
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-6month" value="6month">
+                <input type="radio" name="plan" id="plan-6month" value="6month" required>
                 <label class="plan-label" for="plan-6month">
                   <div class="plan-badge">Best Value</div>
                   <div class="plan-name">6-Month</div>
@@ -366,7 +369,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-3month" value="3month">
+                <input type="radio" name="plan" id="plan-3month" value="3month" required>
                 <label class="plan-label" for="plan-3month">
                   <div class="plan-name">3-Month</div>
                   <div class="plan-price">$500 <span>paid in full</span></div>
@@ -374,7 +377,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-1month" value="1month">
+                <input type="radio" name="plan" id="plan-1month" value="1month" required>
                 <label class="plan-label" for="plan-1month">
                   <div class="plan-name">1-Month</div>
                   <div class="plan-price">$200 <span>/ mo</span></div>
@@ -383,7 +386,7 @@
               </div>
               <div class="plan-divider-label">Drop-Ins &amp; Passes</div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-firstclass" value="firstclass">
+                <input type="radio" name="plan" id="plan-firstclass" value="firstclass" required>
                 <label class="plan-label" for="plan-firstclass">
                   <div class="plan-name">First Class</div>
                   <div class="plan-price">$25</div>
@@ -391,7 +394,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-intro" value="intro">
+                <input type="radio" name="plan" id="plan-intro" value="intro" required>
                 <label class="plan-label" for="plan-intro">
                   <div class="plan-name">1-on-1 Intro</div>
                   <div class="plan-price">$45</div>
@@ -399,7 +402,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-weekpass" value="weekpass">
+                <input type="radio" name="plan" id="plan-weekpass" value="weekpass" required>
                 <label class="plan-label" for="plan-weekpass">
                   <div class="plan-name">1-Week Pass</div>
                   <div class="plan-price">$100</div>
@@ -407,7 +410,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-dropin" value="dropin">
+                <input type="radio" name="plan" id="plan-dropin" value="dropin" required>
                 <label class="plan-label" for="plan-dropin">
                   <div class="plan-name">Drop-In</div>
                   <div class="plan-price">$30</div>
@@ -415,7 +418,7 @@
                 </label>
               </div>
               <div class="plan-option">
-                <input type="radio" name="plan" id="plan-homeschool" value="homeschool">
+                <input type="radio" name="plan" id="plan-homeschool" value="homeschool" required>
                 <label class="plan-label" for="plan-homeschool">
                   <div class="plan-name">Homeschool</div>
                   <div class="plan-price">$160 <span>/ mo</span></div>
@@ -435,10 +438,10 @@
         <!-- ═══ STEP 2 — INFO + PAYMENT ═══ -->
         <div class="su-step is-hidden" id="step-2">
 
-          <div class="plan-chip" id="plan-chip-2" title="Click to change plan">
+          <button type="button" class="plan-chip" id="plan-chip-2" title="Click to change plan" aria-label="Change selected plan">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><path d="M21 3L9 15"/><path d="M10 3H3v18h18v-7"/></svg>
             <span id="chip-label-2"></span>
-          </div>
+          </button>
 
           <!-- Personal info -->
           <div class="su-block">
@@ -449,23 +452,23 @@
             <div class="form-2col form-gap">
               <div class="form-group">
                 <label for="su-first">First Name *</label>
-                <input type="text" id="su-first" placeholder="Jane" autocomplete="given-name">
+                <input type="text" id="su-first" placeholder="Jane" autocomplete="given-name" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-last">Last Name *</label>
-                <input type="text" id="su-last" placeholder="Smith" autocomplete="family-name">
+                <input type="text" id="su-last" placeholder="Smith" autocomplete="family-name" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-email">Email *</label>
-                <input type="email" id="su-email" placeholder="jane@email.com" autocomplete="email">
+                <input type="email" id="su-email" placeholder="jane@email.com" autocomplete="email" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-phone">Phone *</label>
-                <input type="tel" id="su-phone" placeholder="(407) 555-0100" autocomplete="tel">
+                <input type="tel" id="su-phone" placeholder="(407) 555-0100" autocomplete="tel" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-dob">Date of Birth *</label>
-                <input type="date" id="su-dob" autocomplete="bday">
+                <input type="date" id="su-dob" autocomplete="bday" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-program">Program Interest</label>
@@ -510,11 +513,11 @@
             <div class="form-3col">
               <div class="form-group span-2">
                 <label for="su-ec-name">Full Name *</label>
-                <input type="text" id="su-ec-name" placeholder="John Smith">
+                <input type="text" id="su-ec-name" placeholder="John Smith" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="su-ec-rel">Relationship *</label>
-                <select id="su-ec-rel">
+                <select id="su-ec-rel" required aria-required="true">
                   <option value="">Select…</option>
                   <option value="Spouse">Spouse</option>
                   <option value="Partner">Partner</option>
@@ -528,7 +531,7 @@
               </div>
               <div class="form-group span-3">
                 <label for="su-ec-phone">Phone *</label>
-                <input type="tel" id="su-ec-phone" placeholder="(407) 555-0199">
+                <input type="tel" id="su-ec-phone" placeholder="(407) 555-0199" required aria-required="true">
               </div>
             </div>
             <p class="su-err" id="ec-error" style="margin-top:12px;">Please fill in all emergency contact fields.</p>
@@ -548,7 +551,7 @@
 
             <div class="form-group form-gap">
               <label for="card-name">Cardholder Name *</label>
-              <input type="text" id="card-name" placeholder="Jane Smith" autocomplete="cc-name">
+              <input type="text" id="card-name" placeholder="Jane Smith" autocomplete="cc-name" required aria-required="true">
             </div>
 
             <!-- Stripe element (shown when Stripe is configured) -->
@@ -565,17 +568,17 @@
               <div class="form-2col form-gap">
                 <div class="form-group span-2">
                   <label for="plain-card-num">Card Number *</label>
-                  <input type="text" id="plain-card-num" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" inputmode="numeric">
+                  <input type="text" id="plain-card-num" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" inputmode="numeric" required aria-required="true">
                 </div>
               </div>
               <div class="form-2col">
                 <div class="form-group">
                   <label for="plain-card-exp">Expiry (MM/YY) *</label>
-                  <input type="text" id="plain-card-exp" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" inputmode="numeric">
+                  <input type="text" id="plain-card-exp" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" inputmode="numeric" required aria-required="true">
                 </div>
                 <div class="form-group">
                   <label for="plain-card-cvv">CVV *</label>
-                  <input type="text" id="plain-card-cvv" placeholder="123" maxlength="4" autocomplete="cc-csc" inputmode="numeric">
+                  <input type="text" id="plain-card-cvv" placeholder="123" maxlength="4" autocomplete="cc-csc" inputmode="numeric" required aria-required="true">
                 </div>
               </div>
               <div class="card-error-msg" id="card-error-msg-plain" style="margin-top:6px;"></div>
@@ -602,10 +605,10 @@
         <!-- ═══ STEP 3 — WAIVER ═══ -->
         <div class="su-step is-hidden" id="step-3">
 
-          <div class="plan-chip" id="plan-chip-3" title="Click to change plan">
+          <button type="button" class="plan-chip" id="plan-chip-3" title="Click to change plan" aria-label="Change selected plan">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><path d="M21 3L9 15"/><path d="M10 3H3v18h18v-7"/></svg>
             <span id="chip-label-3"></span>
-          </div>
+          </button>
 
           <div class="su-block">
             <div class="su-block-title">
@@ -613,7 +616,7 @@
               Liability Waiver &amp; Release
             </div>
             <div class="waiver-box">
-              <h4>Assumption of Risk, Waiver &amp; Release of Liability</h4>
+              <h2>Assumption of Risk, Waiver &amp; Release of Liability</h2>
               <p>I, the undersigned, hereby acknowledge that I am voluntarily participating in boxing fitness training and related activities ("Activities") at Elite Boxing Fitness Center ("Elite Boxing"), located at 2462 W. SR 426 Suite 1038, Oviedo, FL 32765.</p>
               <p><strong>Assumption of Risk:</strong> I understand and acknowledge that boxing and physical fitness activities involve inherent risks of injury, including but not limited to sprains, fractures, contusions, lacerations, head injuries, cardiovascular events, and other serious injuries or death. I knowingly and voluntarily assume all such risks, both known and unknown.</p>
               <p><strong>Medical Clearance:</strong> I represent that I am in good physical condition and have no medical condition that would prevent or limit my participation. I agree to inform Elite Boxing of any changes to my health that may affect my ability to safely participate.</p>
@@ -623,7 +626,7 @@
               <p><strong>Governing Law:</strong> This agreement shall be governed by the laws of the State of Florida.</p>
             </div>
             <label class="waiver-agree">
-              <input type="checkbox" id="su-waiver">
+              <input type="checkbox" id="su-waiver" required aria-required="true">
               <span>I have read, understood, and agree to the Liability Waiver &amp; Release above. I understand that boxing and physical training involve inherent risks of injury. *</span>
             </label>
             <p class="su-err" id="waiver-error" style="margin-top:10px;">You must accept the waiver to complete registration.</p>
@@ -674,7 +677,7 @@
           </div>
         </div>
         <div class="footer-links">
-          <h4>Programs</h4>
+          <h3>Programs</h3>
           <ul>
             <li><a href="index.html#programs">Juniors (6–10)</a></li>
             <li><a href="index.html#programs">Youth (11–17)</a></li>
@@ -684,7 +687,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Quick Links</h4>
+          <h3>Quick Links</h3>
           <ul>
             <li><a href="index.html#about">About Us</a></li>
             <li><a href="calendar.html">Schedule</a></li>
@@ -694,7 +697,7 @@
           </ul>
         </div>
         <div class="footer-contact">
-          <h4>Contact</h4>
+          <h3>Contact</h3>
           <p>2462 W State Rd 426 #1038<br>Oviedo, FL 32765</p>
           <p><a href="tel:4072308235">(407) 230-8235</a></p>
           <p><a href="mailto:elitebfc1065@gmail.com">elitebfc1065@gmail.com</a></p>
@@ -802,12 +805,9 @@
         style: cardElementStyle(document.documentElement.getAttribute('data-theme')),
       });
       cardElement.mount('#stripe-card-element');
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-          cardElement.update({ style: cardElementStyle(document.documentElement.getAttribute('data-theme')) });
-        });
-      }
+      document.addEventListener('themechange', (e) => {
+        cardElement.update({ style: cardElementStyle(e.detail.theme) });
+      });
       const wrap = document.getElementById('stripe-card-wrap');
       cardElement.on('focus',  () => wrap.classList.add('focused'));
       cardElement.on('blur',   () => wrap.classList.remove('focused'));

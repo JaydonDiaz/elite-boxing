@@ -254,11 +254,19 @@ ScrollTrigger.create({
   },
 });
 
+let lastProgramTrigger = null;
+
 progCards.forEach((card, i) => {
-  card.addEventListener('click', () => openProgram(i));
+  card.addEventListener('click', () => openProgram(i, card));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openProgram(i, card);
+    }
+  });
 });
 
-function openProgram(index) {
+function openProgram(index, trigger) {
   const p = PROGRAMS[index];
   document.getElementById('overlay-img').src          = p.img;
   document.getElementById('overlay-img').alt          = p.name;
@@ -270,8 +278,11 @@ function openProgram(index) {
   cta.textContent = p.ctaText;
   cta.href = p.ctaHref;
 
+  lastProgramTrigger = trigger || null;
   overlay.classList.add('overlay-active');
+  overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  overlayClose.focus();
 
   if (!prefersReducedMotion) {
     gsap.to(overlay, { opacity: 1, duration: 0.3, ease: 'power2.out' });
@@ -292,21 +303,25 @@ function closeProgram(onComplete) {
       opacity: 0, duration: 0.3, delay: 0.1,
       onComplete: () => {
         overlay.classList.remove('overlay-active');
+        overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        if (lastProgramTrigger) { lastProgramTrigger.focus(); lastProgramTrigger = null; }
         if (onComplete) onComplete();
       },
     });
   } else {
     gsap.set(overlay, { opacity: 0 });
     overlay.classList.remove('overlay-active');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastProgramTrigger) { lastProgramTrigger.focus(); lastProgramTrigger = null; }
     if (onComplete) onComplete();
   }
 }
 
 overlayClose.addEventListener('click', () => closeProgram());
 overlay.addEventListener('click', e => { if (e.target === overlay) closeProgram(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProgram(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('overlay-active')) closeProgram(); });
 
 document.getElementById('overlay-cta').addEventListener('click', function (e) {
   e.preventDefault();
@@ -435,8 +450,15 @@ if (contactForm) {
     /* Basic validation */
     const name  = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
+    document.getElementById('name-error').textContent = '';
+    document.getElementById('email-error').textContent = '';
+    document.getElementById('name').removeAttribute('aria-invalid');
+    document.getElementById('email').removeAttribute('aria-invalid');
     if (!name || !email) {
-      shakeField(!name ? 'name' : 'email');
+      const badId = !name ? 'name' : 'email';
+      document.getElementById(badId).setAttribute('aria-invalid', 'true');
+      document.getElementById(`${badId}-error`).textContent = 'This field is required.';
+      shakeField(badId);
       return;
     }
 
@@ -481,7 +503,12 @@ function shakeField(id) {
       onComplete: () => { gsap.set(el, { x: 0 }); el.focus(); } }
   );
   el.style.borderColor = '#f0b429';
-  el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
+  el.addEventListener('input', () => {
+    el.style.borderColor = '';
+    el.removeAttribute('aria-invalid');
+    const errEl = document.getElementById(`${id}-error`);
+    if (errEl) errEl.textContent = '';
+  }, { once: true });
 }
 
 /* ============================================================
