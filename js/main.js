@@ -473,7 +473,7 @@ if (contactForm) {
         phone:        document.getElementById('phone').value.trim() || 'Not provided',
         program:      document.getElementById('program').value || 'Not specified',
         message:      document.getElementById('message').value.trim() || 'No message provided',
-        to_email:     'jaydondiaz0303@gmail.com',
+        to_email:     'elitebfc1065@gmail.com',
       });
     } catch (err) {
       btnText.textContent = 'Send Message';
