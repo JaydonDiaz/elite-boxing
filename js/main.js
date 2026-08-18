@@ -92,13 +92,10 @@ if (!prefersReducedMotion) {
       { opacity: 1, y: 0, duration: 0.7 }, 1.1)
     .fromTo('.hero-actions',
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6 }, 1.3)
-    .fromTo('.hero-scroll',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.8 }, 1.8);
+      { opacity: 1, y: 0, duration: 0.6 }, 1.3);
 } else {
   /* Skip animations but reveal elements */
-  gsap.set(['.hero-tag', '.hero-line', '.hero-sub', '.hero-actions', '.hero-scroll'],
+  gsap.set(['.hero-tag', '.hero-line', '.hero-sub', '.hero-actions'],
     { opacity: 1, y: 0, skewY: 0 });
 }
 
