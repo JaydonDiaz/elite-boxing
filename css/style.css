@@ -361,7 +361,7 @@ html[data-theme="light"] .theme-icon--moon { display: none; }
   position: relative;
   z-index: 2;
   padding-top: var(--nav-h);
-  max-width: 720px;
+  max-width: 1040px;
 }
 .hero-tag {
   display: inline-block;
@@ -374,7 +374,7 @@ html[data-theme="light"] .theme-icon--moon { display: none; }
   opacity: 0;
 }
 .hero-title {
-  font-size: clamp(52px, 9vw, 110px);
+  font-size: clamp(56px, 10.5vw, 132px);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 0.95;
@@ -382,15 +382,20 @@ html[data-theme="light"] .theme-icon--moon { display: none; }
   color: #fff;
 }
 .hero-line { display: block; }
+.hero-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
 .hero-sub {
   font-size: 17px;
   color: rgba(255,255,255,0.65);
   line-height: 1.7;
-  margin-bottom: 40px;
-  max-width: 500px;
+  max-width: 460px;
   opacity: 0;
 }
-.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; flex-shrink: 0; opacity: 0; }
 
 /* ============================================================
    STATS BAR
@@ -1206,6 +1211,7 @@ html[data-theme="light"] .footer-logo { filter: invert(1); }
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-main { flex-direction: column; align-items: flex-start; gap: 28px; }
 }
 
 @media (max-width: 768px) {
